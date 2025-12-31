@@ -36,9 +36,8 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
 ## 项目结构
-finance-copilot
-
-my-finance-copilot/
+finance-copilot-web
+```
 ├── app/                        # Next.js 15 核心路由 (App Router)
 │   ├── api/                    # 真实的后端路由 (如：OCR 处理、报告导出)
 │   │   ├── ocr/route.ts
@@ -72,4 +71,5 @@ my-finance-copilot/
 ├── instrumentation.ts          #  Next.js 服务端 Mock 激活脚本
 ├── next.config.ts              # Next.js 配置文件
 ├── package.json                # 项目依赖与 Scripts
-└── tsconfig.json               # TypeScript 配置 (需包含 @/* 路径别名)            
+└── tsconfig.json               # TypeScript 配置 (需包含 @/* 路径别名)
+```            
