@@ -1,16 +1,13 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { getHello } from '@/src/api/client';
+import { ChatContainer } from "@/src/components/chat/chat-container";
 
 export default function Page() {
-  const [msg, setMsg] = useState('');
-
-  useEffect(() => {
-    getHello().then((res) => {
-      setMsg(res.message);
-    });
-  }, []);
-
-  return <div>{msg}</div>;
+  return (
+    <main className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-cyan-50 flex items-center justify-center p-4">
+      <div className="w-full ">
+        <ChatContainer />
+      </div>
+    </main>
+  );
 }

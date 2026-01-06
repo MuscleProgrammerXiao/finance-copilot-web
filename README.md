@@ -1,75 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 技术栈
+nextjs
 
 ## 项目结构
 finance-copilot-web
 ```
-├── app/                        # Next.js 15 核心路由 (App Router)
-│   ├── api/                    # 真实的后端路由 (如：OCR 处理、报告导出)
-│   │   ├── ocr/route.ts
-│   │   └── report/route.ts
-│   ├── layout.tsx              # 全局布局 (放置 Providers)
-│   └── page.tsx                # 聊天主页面
-├── src/                        # 源代码目录
-│   ├── api/                    # OpenAPI 定义与请求层
-│   │   ├── schema.json         # OpenAPI 原始定义文档
-│   │   └── client.ts           # 封装好的请求客户端 (axios 或 fetch)
-│   ├── gen/                    # 自动生成的 TypeScript 类型
-│   │   └── api-types.ts        # 由 openapi-typescript 生成的类型定义
-│   ├── components/             # 组件库
-│   │   ├── chat/               # 聊天相关 (MessageBubble, QuickActions)
-│   │   ├── layout/             # 布局 (Header, FullscreenModal)
-│   │   ├── ui/                 # 原子组件 (shadcn/ui 如：Button, Input)
-│   │   └── widgets/            # 业务组件 (ClientList, BasicForm, OCRResult)
-│   ├── hooks/                  # 自定义 Hooks (useChatFlow, useScroll)
-│   ├── lib/                    # 工具类与库配置 (utils.ts, axios.ts)
-│   ├── mocks/                  # MSW 模拟逻辑中心
-│   │   ├── handlers/           # 模拟接口响应 (ocr.handler.ts, client.handler.ts)
-│   │   ├── browser.ts          # 浏览器端拦截配置
-│   │   ├── server.ts           # 服务端拦截配置 (用于 SSR/Server Actions)
-│   │   └── index.ts            # 统一导出初始化入口
-│   ├── services/               # 业务逻辑服务层 (调用 gen 中的请求函数)
-│   ├── styles/                 # 全局样式 (globals.css)
-│   └── types/                  # 手动定义的业务 TypeScript 类型
-├── public/                     # 静态资源
-│   ├── mockServiceWorker.js    # MSW 初始化生成的 Service Worker
-│   └── images/                 # 图标、图片资源
-├── instrumentation.ts          #  Next.js 服务端 Mock 激活脚本
-├── next.config.ts              # Next.js 配置文件
-├── package.json                # 项目依赖与 Scripts
-└── tsconfig.json               # TypeScript 配置 (需包含 @/* 路径别名)
+├── app/
+│   ├── favicon.ico
+│   ├── globals.css             # 全局样式（Tailwind CSS 配置）
+│   ├── layout.tsx              # 应用的根布局组件
+│   └── page.tsx                # 应用的主页面，集成了 ChatContainer
+├── public/
+│   ├── file.svg
+│   ├── globe.svg
+│   ├── mockServiceWorker.js    # MSW Mock 服务 Worker
+│   ├── next.svg
+│   ├── vercel.svg
+│   └── window.svg
+├── src/
+│   ├── api/
+│   │   ├── client.ts           # API 客户端配置
+│   │   └── schema.json         # OpenAPI Schema 定义
+│   ├── components/
+│   │   └── chat/
+│   │       ├── chat-container.tsx # 聊天主容器组件（布局、消息流、水印）
+│   │       ├── chat-input.tsx     # 聊天输入框组件
+│   │       ├── message-bubble.tsx # 消息气泡组件
+│   │       └── quick-actions.tsx  # 快捷操作卡片组件
+│   ├── constants/
+│   │   └── flow.ts             # 报表录入流程的配置（步骤、文案、快捷操作）
+│   ├── gen/
+│   │   └── api-types.ts        # 自动生成的 API 类型定义
+│   ├── hooks/
+│   │   └── use-chat.ts         # 聊天逻辑 Hook（状态管理、步骤流转、模拟回复）
+│   ├── lib/
+│   │   └── utils.ts            # 通用工具函数（如 cn 类名合并）
+│   ├── mocks/
+│   │   ├── handlers/
+│   │   │   └── hello.handler.ts
+│   │   ├── MockProvider.tsx
+│   │   ├── browser.ts
+│   │   └── index.ts
+│   └── types/
+│       ├── business.ts         # 业务相关类型定义
+│       └── chat.ts             # 聊天相关类型定义（Message, StepId, QuickAction 等）
+├── .gitignore
+├── README.md
+├── eslint.config.mjs
+├── instrumentation.ts
+├── next.config.ts
+├── package-lock.json
+├── package.json
+├── pnpm-lock.yaml
+├── postcss.config.mjs
+└── tsconfig.json
 ```            
+## 产品说明
+
+```
+**功能设计**
+我要做的产品是录入报表，一个分为五个步骤依次是：“选择客户”->“填写基本信息”->“上传识别报表（非必要）”->“校验报表”->“完成录入”。
+我计划把UI设计成对话问答式录入，我可以通过对话的形式完成录入，也可以通过对话的形式获取另外的信息（这个信息后续会拓展，暂时写死），
+可以点击输入框顶部的卡片按钮进行快速发送获取到对应关键步骤的内容。
+**UI设计**
+UI设计规范只需要考虑Pc端的情况，交互逻辑需要考虑到用户的操作习惯。例如：用户可以通过点击卡片按钮快速获取到对应步骤的内容，也可以通过输入框输入文字进行正常的对话。
+**动画设计**
+需要一些动画效果来提升用户体验。例如：在用户点击卡片按钮时，卡片按钮会有一个缩放效果，提示用户这是一个可点击的区域。在用户输入文字后，输入框会有一个平滑的滚动效果，确保用户可以看到最新的消息。
+**开发要求**
+在写代码时，需要注释好每一个功能点，方便后续的维护和拓展。安装依赖统一使用pnpm安装。
+--------
+以上是产品的功能设计和UI设计规范，我需要根据这些规范开始开发。
+**开始开发**
+
+```

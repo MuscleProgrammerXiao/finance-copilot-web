@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
 import { initMocks } from '@/src/mocks';
 import { MockProvider } from '@/src/mocks/MockProvider';
 const geistSans = Geist({
