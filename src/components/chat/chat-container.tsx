@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { USER_INFO } from "@/src/constants/flow";
 
 export function ChatContainer() {
-  const { messages, isTyping, sendMessage, currentStepData, handleWidgetAction, selectedCustomer } = useChat();
+  const { messages, isTyping, sendMessage, currentStepData, handleWidgetAction, handleToolbarAction } = useChat();
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -64,9 +64,7 @@ export function ChatContainer() {
       {/* 卡片按钮 */}
       <div className="relative">
              <QuickActions 
-                actions={currentStepData.quickActions} 
-                onAction={sendMessage} 
-                selectedCustomer={selectedCustomer}
+                onAction={handleToolbarAction} 
              />
              
         </div>

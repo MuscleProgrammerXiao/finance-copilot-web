@@ -66,6 +66,19 @@ export function MessageBubble({ message, onWidgetAction }: MessageBubbleProps) {
             />
           </motion.div>
         )}
+
+        {!isUser && message.widget === 'placeholder' && message.widgetData && (
+          <motion.div
+             initial={{ opacity: 0, height: 0 }}
+             animate={{ opacity: 1, height: 'auto' }}
+             className="bg-white p-6 rounded-xl border border-dashed border-gray-300 text-center text-gray-400 flex flex-col items-center gap-2"
+          >
+             <div className="w-12 h-12 bg-gray-50 rounded-full flex items-center justify-center">
+                <Bot className="w-6 h-6 text-gray-300" />
+             </div>
+             <p>{message.widgetData.title} 模块开发中</p>
+          </motion.div>
+        )}
       </div>
 
       {isUser && (

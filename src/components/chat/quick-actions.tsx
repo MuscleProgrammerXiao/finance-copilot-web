@@ -1,17 +1,17 @@
 import { QuickAction } from "@/src/types/chat";
-import { Customer } from "@/src/types/business";
 import { CARD_COMPONENT } from "@/src/constants/flow";
 import { Button } from "@/src/components/ui/button";
 import { motion } from "framer-motion";
 import { cn } from "@/src/lib/utils";
+import { useChatStore } from "@/src/store/chat-store";
 
 interface QuickActionsProps {
-  actions?: QuickAction[]; 
-  onAction: (value: string) => void;
-  selectedCustomer?: Customer;
+  onAction: (key: string, label: string) => void;
 }
 
-export function QuickActions({ onAction, selectedCustomer }: QuickActionsProps) {
+export function QuickActions({ onAction }: QuickActionsProps) {
+  const selectedCustomer = useChatStore((state) => state.selectedCustomer);
+
   // Generate actions list from CARD_COMPONENT
   const actionsList = Object.entries(CARD_COMPONENT).map(([key, label]) => {
      let displayLabel = label;
@@ -52,7 +52,7 @@ export function QuickActions({ onAction, selectedCustomer }: QuickActionsProps) 
                  item.variant === 'secondary' && "bg-gray-100 text-gray-500 hover:bg-gray-200 border-transparent",
                  // default variant will use its own styles (usually primary color)
                )}
-               onClick={() => onAction(item.value)}
+               onClick={() => onAction(item.key, item.value)}
              >
                {item.label}
              </Button>
