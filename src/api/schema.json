@@ -27,6 +27,199 @@
           }
         }
       }
+    },
+    "/api/customers": {
+      "get": {
+        "summary": "获取客户列表 (F001, F002)",
+        "description": "获取当前登录用户名下的客户列表，支持通过客户名称进行模糊搜索。",
+        "parameters": [
+          {
+            "name": "loginName",
+            "in": "query",
+            "description": "登录名",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userCode",
+            "in": "query",
+            "description": "用户编码",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "页码",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "每页数量",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "客户名称搜索关键词",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Customer"
+                      }
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/financial-reports": {
+      "get": {
+        "summary": "获取客户财报及权限",
+        "description": "获取指定客户的财务报表列表以及当前用户的操作权限。",
+        "parameters": [
+          {
+            "name": "customerId",
+            "in": "query",
+            "description": "客户ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "loginName",
+            "in": "query",
+            "description": "登录名",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userCode",
+            "in": "query",
+            "description": "用户编码",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reports": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/FinancialReport"
+                      }
+                    },
+                    "permissions": {
+                      "$ref": "#/components/schemas/UserPermissions"
+                    }
+                  },
+                  "required": ["reports", "permissions"]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Customer": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string", "description": "客户名称" },
+          "socialCreditCode": { "type": "string", "description": "社会统一信用代码" }
+        },
+        "required": ["id", "name", "socialCreditCode"]
+      },
+      "FinancialReport": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "customerId": { "type": "string" },
+          "period": { "type": "string", "description": "报表期次，如 202504" },
+          "type": {
+            "type": "string",
+            "enum": ["small_enterprise", "enterprise_new_2019", "enterprise_old_2019"],
+            "description": "报表类型"
+          },
+          "cycle": {
+            "type": "string",
+            "enum": ["year", "half_year", "quarter", "month"],
+            "description": "报表周期"
+          },
+          "nature": {
+            "type": "string",
+            "enum": ["summary", "headquarters", "base", "consolidated"],
+            "description": "报表性质"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["confirmed", "unconfirmed"],
+            "description": "报表状态"
+          },
+          "isAudited": { "type": "boolean", "description": "是否审计" },
+          "auditDate": { "type": "string", "description": "审计日期" },
+          "auditFirm": { "type": "string", "description": "审计会计事务所" },
+          "auditOpinion": { "type": "string", "description": "审计意见" }
+        },
+        "required": ["id", "customerId", "period", "type", "cycle", "nature", "status", "isAudited"]
+      },
+      "UserPermissions": {
+        "type": "object",
+        "properties": {
+          "canCreateReport": { "type": "boolean", "description": "新增财务报表权限" },
+          "canInputCreditReport": { "type": "boolean", "description": "授信报告录入权限" },
+          "canGenerateAIReport": { "type": "boolean", "description": "AI生成报告权限" },
+          "canInputPublicReport": { "type": "boolean", "description": "上市公司财报录入权限" }
+        },
+        "required": ["canCreateReport", "canInputCreditReport", "canGenerateAIReport", "canInputPublicReport"]
+      }
     }
   }
 }

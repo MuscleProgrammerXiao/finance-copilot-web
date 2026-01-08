@@ -14,29 +14,10 @@ export type ReportNature = 'summary' | 'headquarters' | 'base' | 'consolidated';
 
 export type ReportStatus = 'confirmed' | 'unconfirmed'; // 报表状态：已确认，未确认 
 
-export interface Customer {
-  id: string;
-  name: string;
-  socialCreditCode: string; // 社会统一信用代码 
-}
+import { components } from "@/src/gen/api-types";
 
-export interface FinancialReport {
-  id: string;
-  customerId: string;
-  period: string; // 报表期次，如 202504 
-  type: ReportType; // 报表类型 
-  cycle: ReportCycle; // 报表周期 
-  nature: ReportNature; // 报表性质 
-  status: ReportStatus; // 报表状态 
-  isAudited: boolean; // 是否审计 
-  auditDate?: string; // 审计日期 
-  auditFirm?: string; // 审计会计事务所 
-  auditOpinion?: string; // 审计意见 
-}
+export type Customer = components["schemas"]["Customer"];
 
-export interface UserPermissions {
-  canCreateReport: boolean; // 新增财务报表权限 
-  canInputCreditReport: boolean; // 授信报告录入权限 
-  canGenerateAIReport: boolean; // AI生成报告权限 
-  canInputPublicReport: boolean; // 上市公司财报录入权限 
-}
+export type FinancialReport = components["schemas"]["FinancialReport"];
+
+export type UserPermissions = components["schemas"]["UserPermissions"];

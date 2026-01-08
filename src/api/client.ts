@@ -12,3 +12,41 @@ export async function getHello(): Promise<HelloResponse> {
 
   return res.json();
 }
+
+type CustomerListResponse = paths['/api/customers']['get']['responses']['200']['content']['application/json'];
+type CustomerListParams = paths['/api/customers']['get']['parameters']['query'];
+
+export async function getCustomers(params: CustomerListParams): Promise<CustomerListResponse> {
+  const searchParams = new URLSearchParams();
+  if (params.loginName) searchParams.append('loginName', params.loginName);
+  if (params.userCode) searchParams.append('userCode', params.userCode);
+  if (params.page) searchParams.append('page', params.page.toString());
+  if (params.pageSize) searchParams.append('pageSize', params.pageSize.toString());
+  if (params.name) searchParams.append('name', params.name);
+
+  const res = await fetch(`/api/customers?${searchParams.toString()}`);
+
+  if (!res.ok) {
+    throw new Error('request failed');
+  }
+
+  return res.json();
+}
+
+type FinancialReportsResponse = paths['/api/financial-reports']['get']['responses']['200']['content']['application/json'];
+type FinancialReportsParams = paths['/api/financial-reports']['get']['parameters']['query'];
+
+export async function getFinancialReports(params: FinancialReportsParams): Promise<FinancialReportsResponse> {
+  const searchParams = new URLSearchParams();
+  if (params.customerId) searchParams.append('customerId', params.customerId);
+  if (params.loginName) searchParams.append('loginName', params.loginName);
+  if (params.userCode) searchParams.append('userCode', params.userCode);
+
+  const res = await fetch(`/api/financial-reports?${searchParams.toString()}`);
+
+  if (!res.ok) {
+    throw new Error('request failed');
+  }
+
+  return res.json();
+}

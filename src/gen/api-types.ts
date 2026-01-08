@@ -42,10 +42,164 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/customers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * 获取客户列表 (F001, F002)
+         * @description 获取当前登录用户名下的客户列表，支持通过客户名称进行模糊搜索。
+         */
+        get: {
+            parameters: {
+                query: {
+                    /** @description 登录名 */
+                    loginName: string;
+                    /** @description 用户编码 */
+                    userCode: string;
+                    /** @description 页码 */
+                    page?: number;
+                    /** @description 每页数量 */
+                    pageSize?: number;
+                    /** @description 客户名称搜索关键词 */
+                    name?: string;
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description 成功 */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            items?: components["schemas"]["Customer"][];
+                            total?: number;
+                        };
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/financial-reports": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * 获取客户财报及权限
+         * @description 获取指定客户的财务报表列表以及当前用户的操作权限。
+         */
+        get: {
+            parameters: {
+                query: {
+                    /** @description 客户ID */
+                    customerId: string;
+                    /** @description 登录名 */
+                    loginName: string;
+                    /** @description 用户编码 */
+                    userCode: string;
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description 成功 */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            reports: components["schemas"]["FinancialReport"][];
+                            permissions: components["schemas"]["UserPermissions"];
+                        };
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
-    schemas: never;
+    schemas: {
+        Customer: {
+            id: string;
+            /** @description 客户名称 */
+            name: string;
+            /** @description 社会统一信用代码 */
+            socialCreditCode: string;
+        };
+        FinancialReport: {
+            id: string;
+            customerId: string;
+            /** @description 报表期次，如 202504 */
+            period: string;
+            /**
+             * @description 报表类型
+             * @enum {string}
+             */
+            type: "small_enterprise" | "enterprise_new_2019" | "enterprise_old_2019";
+            /**
+             * @description 报表周期
+             * @enum {string}
+             */
+            cycle: "year" | "half_year" | "quarter" | "month";
+            /**
+             * @description 报表性质
+             * @enum {string}
+             */
+            nature: "summary" | "headquarters" | "base" | "consolidated";
+            /**
+             * @description 报表状态
+             * @enum {string}
+             */
+            status: "confirmed" | "unconfirmed";
+            /** @description 是否审计 */
+            isAudited: boolean;
+            /** @description 审计日期 */
+            auditDate?: string;
+            /** @description 审计会计事务所 */
+            auditFirm?: string;
+            /** @description 审计意见 */
+            auditOpinion?: string;
+        };
+        UserPermissions: {
+            /** @description 新增财务报表权限 */
+            canCreateReport: boolean;
+            /** @description 授信报告录入权限 */
+            canInputCreditReport: boolean;
+            /** @description AI生成报告权限 */
+            canGenerateAIReport: boolean;
+            /** @description 上市公司财报录入权限 */
+            canInputPublicReport: boolean;
+        };
+    };
     responses: never;
     parameters: never;
     requestBodies: never;

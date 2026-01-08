@@ -2,12 +2,15 @@ import { Message } from "@/src/types/chat";
 import { cn } from "@/src/lib/utils";
 import { motion } from "framer-motion";
 import { Bot, User } from "lucide-react";
+import { CustomerList } from "./customer-list";
+import { FinancialReportList } from "./financial-report-list";
 
 interface MessageBubbleProps {
   message: Message;
+  onWidgetAction?: (action: string, data?: any) => void;
 }
 
-export function MessageBubble({ message }: MessageBubbleProps) {
+export function MessageBubble({ message, onWidgetAction }: MessageBubbleProps) {
   const isUser = message.role === 'user';
 
   return (
@@ -25,15 +28,44 @@ export function MessageBubble({ message }: MessageBubbleProps) {
         </div>
       )}
 
-      <div
-        className={cn(
-          "max-w-[80%] px-4 py-3 rounded-2xl text-sm leading-relaxed",
-          isUser
-            ? "bg-blue-600 text-white rounded-tr-none"
-            : "bg-white border border-gray-100 shadow-sm text-gray-800 rounded-tl-none"
+      <div className="flex flex-col gap-2 max-w-[90%] md:max-w-[80%]">
+        <div
+          className={cn(
+            "px-4 py-3 rounded-2xl text-sm leading-relaxed",
+            isUser
+              ? "bg-blue-600 text-white rounded-tr-none"
+              : "bg-white border border-gray-100 shadow-sm text-gray-800 rounded-tl-none"
+          )}
+        >
+          {message.content}
+        </div>
+        
+        {/* Render Widget */}
+        {!isUser && message.widget === 'customer-list' && message.widgetData && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+          >
+            <CustomerList 
+              data={message.widgetData} 
+              onSelect={(customer) => onWidgetAction?.('select-customer', customer)} 
+            />
+          </motion.div>
         )}
-      >
-        {message.content}
+
+        {!isUser && message.widget === 'financial-report-list' && message.widgetData && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+          >
+            <FinancialReportList
+              reports={message.widgetData.reports}
+              permissions={message.widgetData.permissions}
+              onAction={(action, report) => onWidgetAction?.('report-action', { action, report })}
+              onQuickAction={(action) => onWidgetAction?.('quick-action', action)}
+            />
+          </motion.div>
+        )}
       </div>
 
       {isUser && (

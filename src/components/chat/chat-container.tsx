@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { USER_INFO } from "@/src/constants/flow";
 
 export function ChatContainer() {
-  const { messages, isTyping, sendMessage, currentStepData } = useChat();
+  const { messages, isTyping, sendMessage, currentStepData, handleWidgetAction, selectedCustomer } = useChat();
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -37,7 +37,11 @@ export function ChatContainer() {
       <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50/50">
         <AnimatePresence initial={false}>
           {messages.map((msg) => (
-            <MessageBubble key={msg.id} message={msg} />
+            <MessageBubble 
+              key={msg.id} 
+              message={msg} 
+              onWidgetAction={handleWidgetAction}
+            />
           ))}
         </AnimatePresence>
         
@@ -62,7 +66,9 @@ export function ChatContainer() {
              <QuickActions 
                 actions={currentStepData.quickActions} 
                 onAction={sendMessage} 
+                selectedCustomer={selectedCustomer}
              />
+             
         </div>
       {/* 输入框 */}
       <ChatInput onSend={sendMessage} disabled={isTyping} />
