@@ -31,6 +31,9 @@ interface ReportStore {
   submittedBasicInfo: BasicInfoData | null;
   submittedAuditInfo: AuditInfoData | null;
 
+  isVerifyOpen: boolean;
+  setVerifyOpen: (val: boolean) => void;
+
   setBasicInfo: (data: Partial<BasicInfoData>) => void;
   setAuditInfo: (data: Partial<AuditInfoData>) => void;
   setReportId: (id: string) => void;
@@ -68,6 +71,7 @@ export const useReportStore = create<ReportStore>()(
       reportId: null,
       isBasicSubmitted: false,
       isAuditSubmitted: false,
+      isVerifyOpen: false,
       submittedBasicInfo: null,
       submittedAuditInfo: null,
 
@@ -76,6 +80,7 @@ export const useReportStore = create<ReportStore>()(
       setReportId: (id) => set({ reportId: id }),
       setBasicSubmitted: (val) => set({ isBasicSubmitted: val }),
       setAuditSubmitted: (val) => set({ isAuditSubmitted: val }),
+      setVerifyOpen: (val) => set({ isVerifyOpen: val }),
       reset: () => set({
         basicInfo: initialBasicInfo,
         auditInfo: initialAuditInfo,
@@ -103,6 +108,7 @@ export const useReportStore = create<ReportStore>()(
           reportId: null,
           isBasicSubmitted: false,
           isAuditSubmitted: false,
+          isVerifyOpen: false,
         };
       }),
     }),

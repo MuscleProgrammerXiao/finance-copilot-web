@@ -2,14 +2,25 @@ import { BasicInfoForm } from './basic-info-form';
 import { AuditInfoForm } from './audit-info-form';
 import { Button } from '@/src/components/ui/button';
 import { useReportStore } from '@/src/store/report-store';
+import { useChatStore } from '@/src/store/chat-store';
+import { toast } from 'sonner';
 
 export function NewReportForm() {
-    const { isBasicSubmitted, isAuditSubmitted } = useReportStore();
+    const { isBasicSubmitted, isAuditSubmitted, setVerifyOpen, reportId } = useReportStore();
+    const { selectedCustomer } = useChatStore();
 
     const isAllSubmitted = isBasicSubmitted && isAuditSubmitted;
 
     const handleVerify = () => {
-        alert('校验财报功能开发中...');
+        if (!selectedCustomer) {
+            toast.error('请先选择客户');
+            return;
+        }
+        if (!reportId) {
+             toast.error('报表ID缺失，请重新提交基本信息');
+             return;
+        }
+        setVerifyOpen(true);
     };
 
     const handleImport = () => {

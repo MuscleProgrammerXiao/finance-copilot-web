@@ -92,86 +92,6 @@ export function useChat() {
   );
 
   /**
-   * 处理 Widget 交互动作
-   */
-  const handleWidgetAction = useCallback(async (action: string, data?: any) => {
-    if (action === 'select-customer') {
-      const customer = data;
-      await sendMessage(`选择客户：${customer.name}`, { skipAutoReply: true });
-      
-      // 更新 Store
-      setSelectedCustomer(customer);
-      setPermissions(null);
-
-      setState(prev => ({ ...prev, isTyping: true }));
-      
-      try {
-        const response = await getFinancialReports({
-           customerId: customer.id,
-           loginName: USER_INFO.loginName,
-           userCode: USER_INFO.userCode
-        });
-        
-        // 更新权限 Store
-        setPermissions(response.permissions);
-        
-        // 模拟网络延迟
-        await new Promise(resolve => setTimeout(resolve, 800));
-
-        setState(prev => {
-           const currentStepIndex = STEP_ORDER.indexOf(prev.currentStep);
-           const nextStepId = STEP_ORDER[currentStepIndex + 1] || prev.currentStep;
-
-           return {
-            ...prev,
-            messages: [
-              ...prev.messages,
-              {
-                 id: Date.now().toString(),
-                 role: 'assistant',
-                 content: `已为您查询到 ${customer.name} 的相关信息：`,
-                 timestamp: Date.now(),
-                 stepId: prev.currentStep,
-                 widget: 'financial-report-list',
-                 widgetData: {
-                   reports: response.reports,
-                   permissions: response.permissions
-                 }
-              }
-            ],
-            isTyping: false,
-            currentStep: nextStepId 
-          };
-        });
-      } catch (e) {
-         console.error("Error fetching reports:", e);
-         setState(prev => ({ 
-           ...prev, 
-           isTyping: false,
-           messages: [...prev.messages, {
-             id: Date.now().toString(),
-             role: 'assistant',
-             content: '获取数据失败，请稍后重试。',
-             timestamp: Date.now(),
-             stepId: prev.currentStep
-           }]
-         }));
-      }
-    } else if (action === 'quick-action') {
-        await sendMessage(data);
-    } else if (action === 'report-action') {
-        const { action: reportAction, report } = data;
-        let msg = '';
-        switch(reportAction) {
-          case 'delete': msg = `删除财报：${report.period}`; break;
-          case 'continue': msg = `继续录入：${report.period}`; break;
-          case 'view': msg = `查看财报：${report.period}`; break;
-        }
-        await sendMessage(msg);
-    }
-  }, [sendMessage, setSelectedCustomer, setPermissions]);
-
-  /**
    * 处理工具栏（QuickActions）动作
    */
   const handleToolbarAction = useCallback(async (key: string, label: string) => {
@@ -308,6 +228,97 @@ export function useChat() {
       }
 
   }, [sendMessage, selectedCustomer, permissions, resetReport, isBasicSubmitted, loadSubmitted, submittedBasicInfo]);
+
+  /**
+   * 处理 Widget 交互动作
+   */
+  const handleWidgetAction = useCallback(async (action: string, data?: any) => {
+    if (action === 'select-customer') {
+      const customer = data;
+      await sendMessage(`选择客户：${customer.name}`, { skipAutoReply: true });
+      
+      // 更新 Store
+      setSelectedCustomer(customer);
+      setPermissions(null);
+
+      setState(prev => ({ ...prev, isTyping: true }));
+      
+      try {
+        const response = await getFinancialReports({
+           customerId: customer.id,
+           loginName: USER_INFO.loginName,
+           userCode: USER_INFO.userCode
+        });
+        
+        // 更新权限 Store
+        setPermissions(response.permissions);
+        
+        // 模拟网络延迟
+        await new Promise(resolve => setTimeout(resolve, 800));
+
+        setState(prev => {
+           const currentStepIndex = STEP_ORDER.indexOf(prev.currentStep);
+           const nextStepId = STEP_ORDER[currentStepIndex + 1] || prev.currentStep;
+
+           return {
+            ...prev,
+            messages: [
+              ...prev.messages,
+              {
+                 id: Date.now().toString(),
+                 role: 'assistant',
+                 content: `已为您查询到 ${customer.name} 的相关信息：`,
+                 timestamp: Date.now(),
+                 stepId: prev.currentStep,
+                 widget: 'financial-report-list',
+                 widgetData: {
+                   reports: response.reports,
+                   permissions: response.permissions
+                 }
+              }
+            ],
+            isTyping: false,
+            currentStep: nextStepId 
+          };
+        });
+      } catch (e) {
+         console.error("Error fetching reports:", e);
+         setState(prev => ({ 
+           ...prev, 
+           isTyping: false,
+           messages: [...prev.messages, {
+             id: Date.now().toString(),
+             role: 'assistant',
+             content: '获取数据失败，请稍后重试。',
+             timestamp: Date.now(),
+             stepId: prev.currentStep
+           }]
+         }));
+      }
+    } else if (action === 'quick-action') {
+        const labelToKeyMap: Record<string, string> = {
+            '新增财务报表': 'NewFinancialReport',
+            '授信报告录入': 'CreditReportInput',
+            'AI生成报告': 'AIGenerateReport',
+            '上市公司财报录入': 'PublicCompanyReportInput'
+        };
+        const key = labelToKeyMap[data];
+        if (key) {
+            await handleToolbarAction(key, data);
+        } else {
+            await sendMessage(data);
+        }
+    } else if (action === 'report-action') {
+        const { action: reportAction, report } = data;
+        let msg = '';
+        switch(reportAction) {
+          case 'delete': msg = `删除财报：${report.period}`; break;
+          case 'continue': msg = `继续录入：${report.period}`; break;
+          case 'view': msg = `查看财报：${report.period}`; break;
+        }
+        await sendMessage(msg);
+    }
+  }, [sendMessage, setSelectedCustomer, setPermissions, handleToolbarAction]);
 
   /**
    * 处理机器人回复逻辑

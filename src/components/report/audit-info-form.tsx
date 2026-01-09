@@ -15,6 +15,7 @@ import { CalendarIcon } from 'lucide-react';
 import { cn } from '@/src/lib/utils';
 import { toast } from "sonner";
 import { useState, useEffect } from 'react';
+import { zhCN } from 'date-fns/locale';
 
 export function AuditInfoForm() {
   const { auditInfo, setAuditInfo, isAuditSubmitted, setAuditSubmitted, reportId, isBasicSubmitted, commitToSubmitted } = useReportStore();
@@ -172,6 +173,10 @@ export function AuditInfoForm() {
                     <PopoverContent className="w-auto p-0">
                         <Calendar
                             mode="single"
+                            locale={zhCN}
+                            captionLayout="dropdown-buttons"
+                            fromYear={1990}
+                            toYear={new Date().getFullYear() + 5}
                             selected={auditInfo.auditDate ? new Date(auditInfo.auditDate) : undefined}
                             onSelect={(date) => setAuditInfo({ auditDate: date ? format(date, 'yyyy-MM-dd') : undefined })}
                             initialFocus
