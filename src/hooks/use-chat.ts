@@ -4,6 +4,8 @@ import { FLOW_STEPS, STEP_ORDER, USER_INFO } from "@/src/constants/flow";
 import { getCustomers, getFinancialReports } from "@/src/api/client";
 import { useChatStore } from "@/src/store/chat-store";
 import { UserPermissions } from "@/src/types/business";
+import { useReportStore } from "@/src/store/report-store";
+import { toast } from "sonner";
 
 /**
  * 聊天逻辑 Hook
@@ -17,6 +19,7 @@ export function useChat() {
   });
 
   const { selectedCustomer, permissions, setSelectedCustomer, setPermissions } = useChatStore();
+  const { reset: resetReport, isBasicSubmitted, loadSubmitted, submittedBasicInfo } = useReportStore();
 
   // 初始化：加载第一步的欢迎语并获取客户列表
   useEffect(() => {
@@ -203,7 +206,7 @@ export function useChat() {
           } catch(e) {
                setState(prev => ({ ...prev, isTyping: false }));
           }
-      } else if (['NewFinancialReport', 'CreditReportInput', 'AIGenerateReport', 'PublicCompanyReportInput'].includes(key)) {
+      } else if (['NewFinancialReport', 'CreditReportInput', 'AIGenerateReport', 'PublicCompanyReportInput', 'BasicInfoInput'].includes(key)) {
           if (!selectedCustomer) {
              // 未选择客户
              try {
@@ -231,6 +234,7 @@ export function useChat() {
              // 已选择客户，检查权限
              const permKeyMap: Record<string, keyof UserPermissions> = {
                  'NewFinancialReport': 'canCreateReport',
+                 'BasicInfoInput': 'canCreateReport',
                  'CreditReportInput': 'canInputCreditReport',
                  'AIGenerateReport': 'canGenerateAIReport',
                  'PublicCompanyReportInput': 'canInputPublicReport'
@@ -239,14 +243,33 @@ export function useChat() {
              const permKey = permKeyMap[key];
              if (permissions && permissions[permKey]) {
                  // 有权限
+                 if (key === 'NewFinancialReport') {
+                     useReportStore.getState().reset();
+                     toast.success('已开启新的财务报表录入');
+                 }
+
+                 let content = `正在为您打开 ${label} 模块...`;
+                 if (key === 'BasicInfoInput') {
+                     useReportStore.getState().loadSubmitted();
+                     const { submittedBasicInfo } = useReportStore.getState();
+                     if (submittedBasicInfo) {
+                         content = "您新增了一条财报录入，已为您反显最新内容。";
+                         toast.success('已加载最近提交的财报信息');
+                     } else {
+                         toast.info('暂无已提交的财报信息');
+                     }
+                 }
+
+                 const widgetType = (key === 'NewFinancialReport' || key === 'BasicInfoInput') ? 'new-report' : 'placeholder';
+
                  setState(prev => ({
                      ...prev,
                      messages: [...prev.messages, {
                          id: Date.now().toString(),
                          role: 'assistant',
-                         content: `正在为您打开 ${label} 模块...`,
+                         content,
                          timestamp: Date.now(),
-                         widget: 'placeholder',
+                         widget: widgetType,
                          widgetData: { title: label }
                      }],
                      isTyping: false
@@ -284,7 +307,7 @@ export function useChat() {
           }));
       }
 
-  }, [sendMessage, selectedCustomer, permissions]);
+  }, [sendMessage, selectedCustomer, permissions, resetReport, isBasicSubmitted, loadSubmitted, submittedBasicInfo]);
 
   /**
    * 处理机器人回复逻辑

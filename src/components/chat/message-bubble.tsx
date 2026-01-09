@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Bot, User } from "lucide-react";
 import { CustomerList } from "./customer-list";
 import { FinancialReportList } from "./financial-report-list";
+import { NewReportForm } from "../report/new-report-form";
 
 interface MessageBubbleProps {
   message: Message;
@@ -77,6 +78,15 @@ export function MessageBubble({ message, onWidgetAction }: MessageBubbleProps) {
                 <Bot className="w-6 h-6 text-gray-300" />
              </div>
              <p>{message.widgetData.title} 模块开发中</p>
+          </motion.div>
+        )}
+
+        {!isUser && message.widget === 'new-report' && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+          >
+             <NewReportForm />
           </motion.div>
         )}
       </div>

@@ -95,6 +95,86 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/report/basic-info": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** 提交基本信息 */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["SubmitBasicInfoRequest"];
+                };
+            };
+            responses: {
+                /** @description 成功 */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["SubmitBasicInfoResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/report/audit-info": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** 提交审计信息 */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["SubmitAuditInfoRequest"];
+                };
+            };
+            responses: {
+                /** @description 成功 */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["SubmitAuditInfoResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/financial-reports": {
         parameters: {
             query?: never;
@@ -188,6 +268,38 @@ export interface components {
             auditFirm?: string;
             /** @description 审计意见 */
             auditOpinion?: string;
+        };
+        SubmitBasicInfoRequest: {
+            customerId: string;
+            customerName: string;
+            userCode: string;
+            loginName?: string;
+            reportNature: string;
+            reportCycle: string;
+            reportType: string;
+            currency: string;
+            reportPeriod: string;
+        };
+        SubmitBasicInfoResponse: {
+            reportId?: string;
+            status?: string;
+        };
+        SubmitAuditInfoRequest: {
+            reportId: string;
+            customerId?: string;
+            userCode?: string;
+            amountUnit: string;
+            decimalPlaces: string;
+            isAudited: string;
+            auditDate?: string;
+            reportNumber?: string;
+            auditFirm?: string;
+            auditOpinion?: string;
+            verificationCode?: string;
+            noAuditReason?: string;
+        };
+        SubmitAuditInfoResponse: {
+            status?: string;
         };
         UserPermissions: {
             /** @description 新增财务报表权限 */

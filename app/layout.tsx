@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { initMocks } from '@/src/mocks';
 import { MockProvider } from '@/src/mocks/MockProvider';
+import { Toaster } from "@/src/components/ui/sonner";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -31,7 +33,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <MockProvider>{children}</MockProvider>
+        <MockProvider>
+          {children}
+          <Toaster />
+        </MockProvider>
       </body>
     </html>
   );

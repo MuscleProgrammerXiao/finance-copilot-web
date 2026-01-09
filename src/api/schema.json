@@ -106,6 +106,60 @@
         }
       }
     },
+    "/api/report/basic-info": {
+      "post": {
+        "summary": "提交基本信息",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubmitBasicInfoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubmitBasicInfoResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/report/audit-info": {
+      "post": {
+        "summary": "提交审计信息",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubmitAuditInfoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubmitAuditInfoResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/financial-reports": {
       "get": {
         "summary": "获取客户财报及权限",
@@ -209,6 +263,52 @@
           "auditOpinion": { "type": "string", "description": "审计意见" }
         },
         "required": ["id", "customerId", "period", "type", "cycle", "nature", "status", "isAudited"]
+      },
+      "SubmitBasicInfoRequest": {
+        "type": "object",
+        "properties": {
+          "customerId": { "type": "string" },
+          "customerName": { "type": "string" },
+          "userCode": { "type": "string" },
+          "loginName": { "type": "string" },
+          "reportNature": { "type": "string" },
+          "reportCycle": { "type": "string" },
+          "reportType": { "type": "string" },
+          "currency": { "type": "string" },
+          "reportPeriod": { "type": "string" }
+        },
+        "required": ["customerId", "customerName", "userCode", "reportNature", "reportCycle", "reportType", "currency", "reportPeriod"]
+      },
+      "SubmitBasicInfoResponse": {
+        "type": "object",
+        "properties": {
+          "reportId": { "type": "string" },
+          "status": { "type": "string" }
+        }
+      },
+      "SubmitAuditInfoRequest": {
+        "type": "object",
+        "properties": {
+           "reportId": { "type": "string" },
+           "customerId": { "type": "string" },
+           "userCode": { "type": "string" },
+           "amountUnit": { "type": "string" },
+           "decimalPlaces": { "type": "string" },
+           "isAudited": { "type": "string" },
+           "auditDate": { "type": "string" },
+           "reportNumber": { "type": "string" },
+           "auditFirm": { "type": "string" },
+           "auditOpinion": { "type": "string" },
+           "verificationCode": { "type": "string" },
+           "noAuditReason": { "type": "string" }
+        },
+        "required": ["reportId", "amountUnit", "decimalPlaces", "isAudited"]
+      },
+      "SubmitAuditInfoResponse": {
+        "type": "object",
+        "properties": {
+          "status": { "type": "string" }
+        }
       },
       "UserPermissions": {
         "type": "object",

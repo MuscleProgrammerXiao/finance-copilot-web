@@ -21,3 +21,6 @@ export type Customer = components["schemas"]["Customer"];
 export type FinancialReport = components["schemas"]["FinancialReport"];
 
 export type UserPermissions = components["schemas"]["UserPermissions"];
+
+export type SubmitBasicInfoRequest = components["schemas"]["SubmitBasicInfoRequest"];
+export type SubmitAuditInfoRequest = components["schemas"]["SubmitAuditInfoRequest"];

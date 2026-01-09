@@ -16,7 +16,6 @@ export const USER_INFO: UserInfo = {
 
 // 卡片按钮
 export const CARD_COMPONENT = {
-  SearchCustomer: "搜索客户",
   CustomerList: "客户列表",
   CustomerLock: "客户锁定",
   NewFinancialReport: "新增财务报表",

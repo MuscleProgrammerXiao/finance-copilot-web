@@ -50,3 +50,29 @@ export async function getFinancialReports(params: FinancialReportsParams): Promi
 
   return res.json();
 }
+
+type SubmitBasicInfoResponse = paths['/api/report/basic-info']['post']['responses']['200']['content']['application/json'];
+type SubmitBasicInfoBody = paths['/api/report/basic-info']['post']['requestBody']['content']['application/json'];
+
+export async function submitBasicInfo(data: SubmitBasicInfoBody): Promise<SubmitBasicInfoResponse> {
+  const res = await fetch('/api/report/basic-info', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error('submit basic info failed');
+  return res.json();
+}
+
+type SubmitAuditInfoResponse = paths['/api/report/audit-info']['post']['responses']['200']['content']['application/json'];
+type SubmitAuditInfoBody = paths['/api/report/audit-info']['post']['requestBody']['content']['application/json'];
+
+export async function submitAuditInfo(data: SubmitAuditInfoBody): Promise<SubmitAuditInfoResponse> {
+  const res = await fetch('/api/report/audit-info', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error('submit audit info failed');
+  return res.json();
+}
