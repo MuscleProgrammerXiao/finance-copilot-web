@@ -1,0 +1,863 @@
+[
+  {
+    "name": "流动资产：",
+    "type": "其他项",
+    "indent_level": 0,
+    "sortIndex": 1,
+    "amount": "0"
+  },
+  {
+    "name": "货币资金",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 2,
+    "amount": "4434.74"
+  },
+  {
+    "name": "以公允价值计量且其变动计入当期损益的金融资产",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 3,
+    "amount": "4532.78"
+  },
+  {
+    "name": "衍生金融资产",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 4,
+    "amount": "5137.16"
+  },
+  {
+    "name": "可供出售金融资产减值准备",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 5,
+    "amount": "3277.28"
+  },
+  {
+    "name": "应收票据",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 6,
+    "amount": "8519.84"
+  },
+  {
+    "name": "应收账款",
+    "type": "计算项",
+    "indent_level": 1,
+    "sortIndex": 7,
+    "amount": "0"
+  },
+  {
+    "name": "应收账款账面价值合计",
+    "type": "计算项",
+    "indent_level": 1,
+    "sortIndex": 8,
+    "amount": "0"
+  },
+  {
+    "name": "应收账款账面余额合计",
+    "type": "计算项",
+    "indent_level": 2,
+    "sortIndex": 9,
+    "amount": "0"
+  },
+  {
+    "name": "1年以内（含1年）",
+    "type": "录入项",
+    "indent_level": 3,
+    "sortIndex": 10,
+    "amount": "5957.73"
+  },
+  {
+    "name": "1年至2年（含2年）",
+    "type": "录入项",
+    "indent_level": 3,
+    "sortIndex": 11,
+    "amount": "8143.83"
+  },
+  {
+    "name": "2年至3年（含3年）",
+    "type": "录入项",
+    "indent_level": 3,
+    "sortIndex": 12,
+    "amount": "7796.20"
+  },
+  {
+    "name": "3年以上",
+    "type": "录入项",
+    "indent_level": 3,
+    "sortIndex": 13,
+    "amount": "1198.34"
+  },
+  {
+    "name": "应收账款坏账准备",
+    "type": "录入项",
+    "indent_level": 2,
+    "sortIndex": 14,
+    "amount": "8273.46"
+  },
+  {
+    "name": "预付款项",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 15,
+    "amount": "2865.18"
+  },
+  {
+    "name": "其他应收款",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 16,
+    "amount": "9290.38"
+  },
+  {
+    "name": "存货",
+    "type": "计算项",
+    "indent_level": 1,
+    "sortIndex": 17,
+    "amount": "0"
+  },
+  {
+    "name": "存货账面余额",
+    "type": "录入项",
+    "indent_level": 2,
+    "sortIndex": 18,
+    "amount": "3761.43"
+  },
+  {
+    "name": "其中：（如为房地产企业）开发产品账面余额",
+    "type": "录入项",
+    "indent_level": 3,
+    "sortIndex": 19,
+    "amount": "9246.61"
+  },
+  {
+    "name": "存货跌价准备",
+    "type": "录入项",
+    "indent_level": 2,
+    "sortIndex": 20,
+    "amount": "9742.09"
+  },
+  {
+    "name": "持有待售资产",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 21,
+    "amount": "7688.84"
+  },
+  {
+    "name": "持有至到期投资减值准备",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 22,
+    "amount": "2265.73"
+  },
+  {
+    "name": "一年内到期的非流动资产",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 23,
+    "amount": "36.49"
+  },
+  {
+    "name": "其他流动资产",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 24,
+    "amount": "479.52"
+  },
+  {
+    "name": "【流动资产合计】",
+    "type": "计算项",
+    "indent_level": 1,
+    "sortIndex": 25,
+    "amount": "0"
+  },
+  {
+    "name": "非流动资产：",
+    "type": "其他项",
+    "indent_level": 0,
+    "sortIndex": 26,
+    "amount": "0"
+  },
+  {
+    "name": "可供出售金融资产",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 27,
+    "amount": "9789.62"
+  },
+  {
+    "name": "持有至到期投资",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 28,
+    "amount": "2112.30"
+  },
+  {
+    "name": "长期应收款",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 29,
+    "amount": "3555.15"
+  },
+  {
+    "name": "长期股权投资",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 30,
+    "amount": "2065.40"
+  },
+  {
+    "name": "长期股权投资减值准备",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 31,
+    "amount": "2312.21"
+  },
+  {
+    "name": "投资性房地产",
+    "type": "计算项",
+    "indent_level": 1,
+    "sortIndex": 32,
+    "amount": "0"
+  },
+  {
+    "name": "投资性房地产账面价值合计：",
+    "type": "计算项",
+    "indent_level": 2,
+    "sortIndex": 33,
+    "amount": "0"
+  },
+  {
+    "name": "房屋、建筑物帐面价值（成本模式）",
+    "type": "录入项",
+    "indent_level": 3,
+    "sortIndex": 34,
+    "amount": "2238.99"
+  },
+  {
+    "name": "土地使用权账面价值（成本模式）",
+    "type": "录入项",
+    "indent_level": 3,
+    "sortIndex": 35,
+    "amount": "4011.79"
+  },
+  {
+    "name": "投资性房地产公允价值合计：",
+    "type": "计算项",
+    "indent_level": 2,
+    "sortIndex": 36,
+    "amount": "0"
+  },
+  {
+    "name": "房屋、建筑物公允价值（公允价值模式）",
+    "type": "录入项",
+    "indent_level": 3,
+    "sortIndex": 37,
+    "amount": "4912.25"
+  },
+  {
+    "name": "土地使用权公允价值（公允价值模式）",
+    "type": "录入项",
+    "indent_level": 3,
+    "sortIndex": 38,
+    "amount": "1752.51"
+  },
+  {
+    "name": "投资性房地产减值准备",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 39,
+    "amount": "9699.69"
+  },
+  {
+    "name": "固定资产",
+    "type": "计算项",
+    "indent_level": 1,
+    "sortIndex": 40,
+    "amount": "0"
+  },
+  {
+    "name": "固定资产账面价值合计：",
+    "type": "计算项",
+    "indent_level": 1,
+    "sortIndex": 41,
+    "amount": "0"
+  },
+  {
+    "name": "固定资产一原值",
+    "type": "录入项",
+    "indent_level": 2,
+    "sortIndex": 42,
+    "amount": "6597.02"
+  },
+  {
+    "name": "固定资产累计折旧",
+    "type": "录入项",
+    "indent_level": 2,
+    "sortIndex": 43,
+    "amount": "374.82"
+  },
+  {
+    "name": "固定资产减值准备合计",
+    "type": "计算项",
+    "indent_level": 2,
+    "sortIndex": 44,
+    "amount": "0"
+  },
+  {
+    "name": "固定资产减值准备",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 45,
+    "amount": "7594.87"
+  },
+  {
+    "name": "在建工程",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 46,
+    "amount": "6326.17"
+  },
+  {
+    "name": "在建工程减值准备",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 47,
+    "amount": "2378.91"
+  },
+  {
+    "name": "工程物资减值准备",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 48,
+    "amount": "7830.44"
+  },
+  {
+    "name": "生产性生物资产",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 49,
+    "amount": "3990.11"
+  },
+  {
+    "name": "生产性生物资产减值准备",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 50,
+    "amount": "3137.72"
+  },
+  {
+    "name": "油气资产",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 51,
+    "amount": "7054.91"
+  },
+  {
+    "name": "油气资产减值准备",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 52,
+    "amount": "9116.89"
+  },
+  {
+    "name": "无形资产",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 53,
+    "amount": "3254.61"
+  },
+  {
+    "name": "无形资产减值准备",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 54,
+    "amount": "2801.29"
+  },
+  {
+    "name": "开发支出",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 55,
+    "amount": "2325.85"
+  },
+  {
+    "name": "商誉",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 56,
+    "amount": "3186.36"
+  },
+  {
+    "name": "商誉减值准备",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 57,
+    "amount": "491.68"
+  },
+  {
+    "name": "长期待摊费用",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 58,
+    "amount": "5510.45"
+  },
+  {
+    "name": "递延所得税资产",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 59,
+    "amount": "9566.38"
+  },
+  {
+    "name": "其他非流动资产",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 60,
+    "amount": "7164.66"
+  },
+  {
+    "name": "坏账准备",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 61,
+    "amount": "1867.80"
+  },
+  {
+    "name": "其他",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 62,
+    "amount": "5848.18"
+  },
+  {
+    "name": "【非流动资产合计】",
+    "type": "计算项",
+    "indent_level": 1,
+    "sortIndex": 63,
+    "amount": "0"
+  },
+  {
+    "name": "【资产总计】",
+    "type": "计算项",
+    "indent_level": 1,
+    "sortIndex": 64,
+    "amount": "0"
+  },
+  {
+    "name": "流动负债",
+    "type": "其他项",
+    "indent_level": 0,
+    "sortIndex": 65,
+    "amount": "0"
+  },
+  {
+    "name": "短期借款合计：",
+    "type": "计算项",
+    "indent_level": 1,
+    "sortIndex": 66,
+    "amount": "0"
+  },
+  {
+    "name": "信用借款（短期）",
+    "type": "录入项",
+    "indent_level": 2,
+    "sortIndex": 67,
+    "amount": "9367.67"
+  },
+  {
+    "name": "抵押贷款（短期）",
+    "type": "录入项",
+    "indent_level": 2,
+    "sortIndex": 68,
+    "amount": "3014.63"
+  },
+  {
+    "name": "质押贷款（短期）",
+    "type": "录入项",
+    "indent_level": 2,
+    "sortIndex": 69,
+    "amount": "6602.74"
+  },
+  {
+    "name": "保证贷款（短期）",
+    "type": "录入项",
+    "indent_level": 2,
+    "sortIndex": 70,
+    "amount": "7314.71"
+  },
+  {
+    "name": "短期借款",
+    "type": "计算项",
+    "indent_level": 1,
+    "sortIndex": 71,
+    "amount": "0"
+  },
+  {
+    "name": "以公允价值计量且其变动计入当期损益的金融负债",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 72,
+    "amount": "647.32"
+  },
+  {
+    "name": "衍生金融负债",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 73,
+    "amount": "2945.91"
+  },
+  {
+    "name": "应付票据",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 74,
+    "amount": "9073.51"
+  },
+  {
+    "name": "应付账款",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 75,
+    "amount": "7923.25"
+  },
+  {
+    "name": "预收款项",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 76,
+    "amount": "6715.20"
+  },
+  {
+    "name": "应付职工薪酬",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 77,
+    "amount": "7514.06"
+  },
+  {
+    "name": "应交税费",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 78,
+    "amount": "2232.42"
+  },
+  {
+    "name": "其他应付款",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 79,
+    "amount": "2317.78"
+  },
+  {
+    "name": "持有待售负债",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 80,
+    "amount": "8505.16"
+  },
+  {
+    "name": "一年内到期的非流动负债",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 81,
+    "amount": "2556.20"
+  },
+  {
+    "name": "其他流动负债",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 82,
+    "amount": "6764.01"
+  },
+  {
+    "name": "【流动负债合计】",
+    "type": "计算项",
+    "indent_level": 1,
+    "sortIndex": 83,
+    "amount": "0"
+  },
+  {
+    "name": "非流动负债：",
+    "type": "其他项",
+    "indent_level": 0,
+    "sortIndex": 84,
+    "amount": "0"
+  },
+  {
+    "name": "长期借款合计：",
+    "type": "计算项",
+    "indent_level": 1,
+    "sortIndex": 85,
+    "amount": "0"
+  },
+  {
+    "name": "信用借款（长期）",
+    "type": "录入项",
+    "indent_level": 2,
+    "sortIndex": 86,
+    "amount": "1321.50"
+  },
+  {
+    "name": "抵押贷款（长期）",
+    "type": "录入项",
+    "indent_level": 2,
+    "sortIndex": 87,
+    "amount": "175.89"
+  },
+  {
+    "name": "质押贷款（长期）",
+    "type": "录入项",
+    "indent_level": 2,
+    "sortIndex": 88,
+    "amount": "9207.08"
+  },
+  {
+    "name": "保证贷款（长期）",
+    "type": "录入项",
+    "indent_level": 2,
+    "sortIndex": 89,
+    "amount": "4436.01"
+  },
+  {
+    "name": "长期借款",
+    "type": "计算项",
+    "indent_level": 1,
+    "sortIndex": 90,
+    "amount": "0"
+  },
+  {
+    "name": "应付债券",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 91,
+    "amount": "5611.08"
+  },
+  {
+    "name": "其中：优先股",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 92,
+    "amount": "3887.44"
+  },
+  {
+    "name": "永续债",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 93,
+    "amount": "2286.52"
+  },
+  {
+    "name": "长期应付款",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 94,
+    "amount": "5809.89"
+  },
+  {
+    "name": "预计负债",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 95,
+    "amount": "8657.93"
+  },
+  {
+    "name": "递延收益",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 96,
+    "amount": "1049.47"
+  },
+  {
+    "name": "递延所得税负债",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 97,
+    "amount": "2739.24"
+  },
+  {
+    "name": "其他非流动负债",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 98,
+    "amount": "3278.54"
+  },
+  {
+    "name": "【非流动负债合计】",
+    "type": "计算项",
+    "indent_level": 1,
+    "sortIndex": 99,
+    "amount": "0"
+  },
+  {
+    "name": "【负债合计】",
+    "type": "计算项",
+    "indent_level": 1,
+    "sortIndex": 100,
+    "amount": "0"
+  },
+  {
+    "name": "所有者（或股东权益）：",
+    "type": "其他项",
+    "indent_level": 0,
+    "sortIndex": 101,
+    "amount": "0"
+  },
+  {
+    "name": "实收资本（或股本）",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 102,
+    "amount": "4936.20"
+  },
+  {
+    "name": "其他权益工具",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 103,
+    "amount": "2282.70"
+  },
+  {
+    "name": "其中：优先股",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 104,
+    "amount": "7982.70"
+  },
+  {
+    "name": "永续债",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 105,
+    "amount": "5333.39"
+  },
+  {
+    "name": "资本公积",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 106,
+    "amount": "7763.31"
+  },
+  {
+    "name": "减：库存股",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 107,
+    "amount": "3617.48"
+  },
+  {
+    "name": "其他综合收益",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 108,
+    "amount": "4918.65"
+  },
+  {
+    "name": "专项存储",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 109,
+    "amount": "7244.15"
+  },
+  {
+    "name": "盈余公积",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 110,
+    "amount": "8839.99"
+  },
+  {
+    "name": "未分配利润",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 111,
+    "amount": "8074.16"
+  },
+  {
+    "name": "【归属于母公司所有者权益合计】",
+    "type": "计算项",
+    "indent_level": 1,
+    "sortIndex": 112,
+    "amount": "0"
+  },
+  {
+    "name": "少数股东权益",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 113,
+    "amount": "1708.01"
+  },
+  {
+    "name": "【所有者权益（或股东权益）合计】",
+    "type": "计算项",
+    "indent_level": 1,
+    "sortIndex": 114,
+    "amount": "0"
+  },
+  {
+    "name": "【负债和所有者权益（或股东权益）总计】",
+    "type": "计算项",
+    "indent_level": 1,
+    "sortIndex": 115,
+    "amount": "0"
+  },
+  {
+    "name": "附注资料：",
+    "type": "其他项",
+    "indent_level": 0,
+    "sortIndex": 116,
+    "amount": "0"
+  },
+  {
+    "name": "1_借款",
+    "type": "其他项",
+    "indent_level": 0,
+    "sortIndex": 117,
+    "amount": "0"
+  },
+  {
+    "name": "借款合计：",
+    "type": "计算项",
+    "indent_level": 1,
+    "sortIndex": 118,
+    "amount": "0"
+  },
+  {
+    "name": "2_或有负债",
+    "type": "其他项",
+    "indent_level": 0,
+    "sortIndex": 119,
+    "amount": "0"
+  },
+  {
+    "name": "已贴现商业承兑汇票",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 120,
+    "amount": "7761.86"
+  },
+  {
+    "name": "对外提供担保",
+    "type": "录入项",
+    "indent_level": 1,
+    "sortIndex": 121,
+    "amount": "2354.01"
+  },
+  {
+    "name": "5_资产减值准备",
+    "type": "其他项",
+    "indent_level": 0,
+    "sortIndex": 122,
+    "amount": "0"
+  },
+  {
+    "name": "资产减值准备合计：",
+    "type": "计算项",
+    "indent_level": 1,
+    "sortIndex": 123,
+    "amount": "0"
+  }
+]
