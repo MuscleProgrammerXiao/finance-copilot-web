@@ -9,6 +9,7 @@ import { USER_INFO } from '@/src/constants/flow';
 import { submitBasicInfo } from '@/src/api/client';
 import { SubmitBasicInfoRequest } from '@/src/types/business';
 import { toast } from "sonner";
+import { cn } from "@/src/lib/utils";
 
 export function BasicInfoForm() {
   const { basicInfo, setBasicInfo, isBasicSubmitted, setBasicSubmitted, setReportId, commitToSubmitted } = useReportStore();
@@ -57,115 +58,131 @@ export function BasicInfoForm() {
   }
 
   return (
-    <Card className="w-full mb-4 shadow-none border-0 sm:border sm:shadow-sm">
-      <CardHeader>
-        <CardTitle className="text-base">基本信息录入</CardTitle>
+    <Card className="w-full mb-4 shadow-sm border-slate-200 bg-white/50 backdrop-blur-sm">
+      <CardHeader className="pb-3 border-b border-slate-100">
+        <CardTitle className="text-sm font-semibold text-slate-800 flex items-center gap-2">
+            <span className="w-1 h-4 bg-blue-600 rounded-full"></span>
+            基本信息录入
+        </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-4">
-        {/* 报表性质 */}
-        <div className="space-y-2">
-          <Label>报表性质</Label>
-          <Select 
-            disabled={isBasicSubmitted} 
-            value={basicInfo.reportNature} 
-            onValueChange={(val) => setBasicInfo({ reportNature: val })}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="请选择报表性质" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="summary">汇总报表</SelectItem>
-              <SelectItem value="headquarters">总公司报表</SelectItem>
-              <SelectItem value="base">本部报表</SelectItem>
-              <SelectItem value="consolidated">合并报表</SelectItem>
-            </SelectContent>
-          </Select>
+      <CardContent className="space-y-5 pt-5">
+        <div className="grid grid-cols-2 gap-5">
+            {/* 报表性质 */}
+            <div className="space-y-2">
+            <Label className="text-slate-600 font-medium">报表性质</Label>
+            <Select 
+                disabled={isBasicSubmitted} 
+                value={basicInfo.reportNature} 
+                onValueChange={(val) => setBasicInfo({ reportNature: val })}
+            >
+                <SelectTrigger className="bg-white border-slate-200 focus:ring-blue-500/20">
+                <SelectValue placeholder="请选择" />
+                </SelectTrigger>
+                <SelectContent>
+                <SelectItem value="summary">汇总报表</SelectItem>
+                <SelectItem value="headquarters">总公司报表</SelectItem>
+                <SelectItem value="base">本部报表</SelectItem>
+                <SelectItem value="consolidated">合并报表</SelectItem>
+                </SelectContent>
+            </Select>
+            </div>
+
+            {/* 报表周期 */}
+            <div className="space-y-2">
+            <Label className="text-slate-600 font-medium">报表周期</Label>
+            <Select 
+                disabled={isBasicSubmitted} 
+                value={basicInfo.reportCycle} 
+                onValueChange={(val) => setBasicInfo({ reportCycle: val })}
+            >
+                <SelectTrigger className="bg-white border-slate-200 focus:ring-blue-500/20">
+                <SelectValue placeholder="请选择" />
+                </SelectTrigger>
+                <SelectContent>
+                <SelectItem value="year">年报</SelectItem>
+                <SelectItem value="half_year">半年报</SelectItem>
+                <SelectItem value="quarter">季报</SelectItem>
+                <SelectItem value="month">月报</SelectItem>
+                </SelectContent>
+            </Select>
+            </div>
         </div>
 
-        {/* 报表周期 */}
-        <div className="space-y-2">
-          <Label>报表周期</Label>
-          <Select 
-            disabled={isBasicSubmitted} 
-            value={basicInfo.reportCycle} 
-            onValueChange={(val) => setBasicInfo({ reportCycle: val })}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="请选择报表周期" />
-            </SelectTrigger>
-            <SelectContent>
-               <SelectItem value="year">年报</SelectItem>
-               <SelectItem value="half_year">半年报</SelectItem>
-               <SelectItem value="quarter">季报</SelectItem>
-               <SelectItem value="month">月报</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
+        <div className="grid grid-cols-2 gap-5">
+            {/* 报表类型 */}
+            <div className="space-y-2 col-span-2">
+            <Label className="text-slate-600 font-medium">报表类型</Label>
+            <Select 
+                disabled={isBasicSubmitted} 
+                value={basicInfo.reportType} 
+                onValueChange={(val) => setBasicInfo({ reportType: val })}
+            >
+                <SelectTrigger className="bg-white border-slate-200 focus:ring-blue-500/20">
+                <SelectValue placeholder="请选择报表类型" />
+                </SelectTrigger>
+                <SelectContent>
+                <SelectItem value="small_enterprise">小企业财务报表</SelectItem>
+                <SelectItem value="enterprise_new_2019">企业财务报表格式（已执行新金融准则...）2019年版</SelectItem>
+                <SelectItem value="enterprise_old_2019">企业财务报表格式（未执行新金融准则...）2019年版</SelectItem>
+                </SelectContent>
+            </Select>
+            </div>
 
-        {/* 报表类型 */}
-        <div className="space-y-2">
-          <Label>报表类型</Label>
-          <Select 
-             disabled={isBasicSubmitted} 
-             value={basicInfo.reportType} 
-             onValueChange={(val) => setBasicInfo({ reportType: val })}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="请选择报表类型" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="small_enterprise">小企业财务报表</SelectItem>
-              <SelectItem value="enterprise_new_2019">企业财务报表格式（已执行新金融准则...）2019年版</SelectItem>
-              <SelectItem value="enterprise_old_2019">企业财务报表格式（未执行新金融准则...）2019年版</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
+            {/* 货币类型 */}
+            <div className="space-y-2">
+            <Label className="text-slate-600 font-medium">货币类型</Label>
+            <Select 
+                disabled={isBasicSubmitted} 
+                value={basicInfo.currency} 
+                onValueChange={(val) => setBasicInfo({ currency: val })}
+            >
+                <SelectTrigger className="bg-white border-slate-200 focus:ring-blue-500/20">
+                <SelectValue placeholder="请选择" />
+                </SelectTrigger>
+                <SelectContent>
+                <SelectItem value="CNY">人民币 (CNY)</SelectItem>
+                <SelectItem value="USD">美元 (USD)</SelectItem>
+                <SelectItem value="EUR">欧元 (EUR)</SelectItem>
+                </SelectContent>
+            </Select>
+            </div>
 
-        {/* 货币类型 */}
-        <div className="space-y-2">
-           <Label>货币类型</Label>
-           <Select 
-              disabled={isBasicSubmitted} 
-              value={basicInfo.currency} 
-              onValueChange={(val) => setBasicInfo({ currency: val })}
-           >
-             <SelectTrigger>
-               <SelectValue placeholder="请选择货币" />
-             </SelectTrigger>
-             <SelectContent>
-               <SelectItem value="CNY">人民币 (CNY)</SelectItem>
-               <SelectItem value="USD">美元 (USD)</SelectItem>
-               <SelectItem value="EUR">欧元 (EUR)</SelectItem>
-             </SelectContent>
-           </Select>
-        </div>
-
-        {/* 报表期次 */}
-        <div className="space-y-2">
-           <Label>报表期次</Label>
-           <Select 
-              disabled={isBasicSubmitted} 
-              value={basicInfo.reportPeriod} 
-              onValueChange={(val) => setBasicInfo({ reportPeriod: val })}
-           >
-             <SelectTrigger>
-               <SelectValue placeholder="请选择期次" />
-             </SelectTrigger>
-             <SelectContent className="max-h-60">
-                {periodOptions.map(p => (
-                   <SelectItem key={p} value={p}>{p}</SelectItem>
-                ))}
-             </SelectContent>
-           </Select>
+            {/* 报表期次 */}
+            <div className="space-y-2">
+            <Label className="text-slate-600 font-medium">报表期次</Label>
+            <Select 
+                disabled={isBasicSubmitted} 
+                value={basicInfo.reportPeriod} 
+                onValueChange={(val) => setBasicInfo({ reportPeriod: val })}
+            >
+                <SelectTrigger className="bg-white border-slate-200 focus:ring-blue-500/20">
+                <SelectValue placeholder="请选择" />
+                </SelectTrigger>
+                <SelectContent className="max-h-60">
+                    {periodOptions.map(p => (
+                    <SelectItem key={p} value={p}>{p}</SelectItem>
+                    ))}
+                </SelectContent>
+            </Select>
+            </div>
         </div>
 
         {/* 社会统一信用代码 */}
         <div className="space-y-2">
-           <Label>社会统一信用代码</Label>
-           <Input value={selectedCustomer?.socialCreditCode || ''} disabled readOnly className="bg-gray-50" />
+           <Label className="text-slate-600 font-medium">社会统一信用代码</Label>
+           <Input value={selectedCustomer?.socialCreditCode || ''} disabled readOnly className="bg-slate-50 border-slate-200 text-slate-500" />
         </div>
 
-        <Button onClick={handleSubmit} disabled={isBasicSubmitted} className="w-full">
+        <Button 
+            onClick={handleSubmit} 
+            disabled={isBasicSubmitted} 
+            className={cn(
+                "w-full transition-all duration-300 shadow-sm",
+                isBasicSubmitted 
+                    ? "bg-slate-100 text-slate-400 hover:bg-slate-200"
+                    : "bg-blue-600 hover:bg-blue-700 hover:shadow-blue-500/20"
+            )}
+        >
            {isBasicSubmitted ? '已提交' : '提交基本信息'}
         </Button>
       </CardContent>

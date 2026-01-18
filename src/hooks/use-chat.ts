@@ -126,7 +126,63 @@ export function useChat() {
           } catch(e) {
                setState(prev => ({ ...prev, isTyping: false }));
           }
-      } else if (['NewFinancialReport', 'CreditReportInput', 'AIGenerateReport', 'PublicCompanyReportInput', 'BasicInfoInput'].includes(key)) {
+      } else if (key === 'ImportReport') {
+          if (!selectedCustomer) {
+              setState(prev => ({
+                  ...prev,
+                  messages: [...prev.messages, {
+                      id: Date.now().toString(),
+                      role: 'assistant',
+                      content: '请先选择客户后再进行导入操作。',
+                      timestamp: Date.now()
+                  }],
+                  isTyping: false
+              }));
+          } else {
+              useReportStore.getState().setImportOpen(true);
+              setState(prev => ({
+                  ...prev,
+                  messages: [...prev.messages, {
+                      id: Date.now().toString(),
+                      role: 'assistant',
+                      content: '已为您打开报表导入窗口。',
+                      timestamp: Date.now()
+                  }],
+                  isTyping: false
+              }));
+          }
+      } else if (key === 'VerifyReport') {
+          const { reportId, submittedBasicInfo } = useReportStore.getState();
+          if (selectedCustomer && submittedBasicInfo && reportId) {
+             useReportStore.getState().setVerifyOpen(true);
+             setState(prev => ({
+                ...prev,
+                messages: [...prev.messages, {
+                    id: Date.now().toString(),
+                    role: 'assistant',
+                    content: '已为您打开财报校验页面。',
+                    timestamp: Date.now()
+                }],
+                isTyping: false
+             }));
+          } else {
+             let missing = [];
+             if (!selectedCustomer) missing.push("客户信息");
+             if (!submittedBasicInfo) missing.push("基本信息");
+             if (!reportId) missing.push("报表ID");
+             
+             setState(prev => ({
+                ...prev,
+                messages: [...prev.messages, {
+                    id: Date.now().toString(),
+                    role: 'assistant',
+                    content: `无法打开校验页面。缺少以下必要信息：${missing.join('、')}。请先完成报表录入流程。`,
+                    timestamp: Date.now()
+                }],
+                isTyping: false
+             }));
+          }
+      } else if (['NewFinancialReport', 'AIGenerateReport', 'PublicCompanyReportInput', 'BasicInfoInput'].includes(key)) {
           if (!selectedCustomer) {
              // 未选择客户
              try {
@@ -155,7 +211,6 @@ export function useChat() {
              const permKeyMap: Record<string, keyof UserPermissions> = {
                  'NewFinancialReport': 'canCreateReport',
                  'BasicInfoInput': 'canCreateReport',
-                 'CreditReportInput': 'canInputCreditReport',
                  'AIGenerateReport': 'canGenerateAIReport',
                  'PublicCompanyReportInput': 'canInputPublicReport'
              };
@@ -164,8 +219,27 @@ export function useChat() {
              if (permissions && permissions[permKey]) {
                  // 有权限
                  if (key === 'NewFinancialReport') {
-                     useReportStore.getState().reset();
-                     toast.success('已开启新的财务报表录入');
+                     const { submittedBasicInfo, reportId } = useReportStore.getState();
+                     if (submittedBasicInfo && reportId) {
+                         setState(prev => ({
+                             ...prev,
+                             messages: [...prev.messages, {
+                                 id: Date.now().toString(),
+                                 role: 'assistant',
+                                 content: "当前已存在一份正在录入的报表。您可以继续编辑现有信息，或者点击下方按钮开始新的录入（这将覆盖当前进度）。",
+                                 timestamp: Date.now(),
+                                 widget: 'new-report', 
+                                 widgetData: { title: label, isOverwritePrompt: true } 
+                             }],
+                             isTyping: false
+                         }));
+                         useReportStore.getState().loadSubmitted();
+                         toast.info('已加载当前进行中的报表信息');
+                         return; // Return early to avoid adding another message
+                     } else {
+                        useReportStore.getState().reset();
+                        toast.success('已开启新的财务报表录入');
+                     }
                  }
 
                  let content = `正在为您打开 ${label} 模块...`;
@@ -173,11 +247,15 @@ export function useChat() {
                      useReportStore.getState().loadSubmitted();
                      const { submittedBasicInfo } = useReportStore.getState();
                      if (submittedBasicInfo) {
-                         content = "您新增了一条财报录入，已为您反显最新内容。";
-                         toast.success('已加载最近提交的财报信息');
+                         content = "已为您加载已录入的基本信息。";
                      } else {
-                         toast.info('暂无已提交的财报信息');
+                         // Should not happen if button is hidden, but safe fallback
+                         content = "暂无已录入的基本信息。";
                      }
+                 }
+                 
+                 if (key === 'NewFinancialReport' && useReportStore.getState().submittedBasicInfo) {
+                     content = "检测到您有未完成的报表录入。已为您恢复之前的进度。如需重新开始，请直接修改并提交。";
                  }
 
                  const widgetType = (key === 'NewFinancialReport' || key === 'BasicInfoInput') ? 'new-report' : 'placeholder';

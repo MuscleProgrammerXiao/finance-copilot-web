@@ -266,7 +266,7 @@ ReportTableRow.displayName = "ReportTableRow";
 // --- Main Component ---
 
 export function VerifyReportModal() {
-    const { isVerifyOpen, setVerifyOpen } = useReportStore();
+    const { isVerifyOpen, setVerifyOpen, setImportOpen, importData } = useReportStore();
     const { selectedCustomer } = useChatStore();
     
     const [activeTab, setActiveTab] = useState<ReportType>('balance');
@@ -360,9 +360,33 @@ export function VerifyReportModal() {
     // Image Viewer State
     const [reports, setReports] = useState<Record<ReportType, ReportState>>({
         balance: { status: 'unuploaded', files: [], currentIndex: 0 },
-        profit: { status: 'success', files: [{ type: 'image', url: '/mock-report.jpg' }], currentIndex: 0 },
-        cash: { status: 'failed', files: [{ type: 'excel', url: '' }], currentIndex: 0 }
+        profit: { status: 'unuploaded', files: [], currentIndex: 0 },
+        cash: { status: 'unuploaded', files: [], currentIndex: 0 }
     });
+
+    // Sync with imported data
+    useEffect(() => {
+        if (importData && Array.isArray(importData)) {
+            const newReports = { ...reports };
+            
+            importData.forEach((file: any) => {
+                let type: ReportType | null = null;
+                if (file.recognizedType === '资产负债表') type = 'balance';
+                else if (file.recognizedType === '利润表') type = 'profit';
+                else if (file.recognizedType === '现金流量表') type = 'cash';
+
+                if (type) {
+                    newReports[type] = {
+                        status: 'success',
+                        files: [{ type: file.type, url: file.url || '' }],
+                        currentIndex: 0
+                    };
+                }
+            });
+            
+            setReports(newReports);
+        }
+    }, [importData]);
 
     const [scale, setScale] = useState(100);
     const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -376,14 +400,14 @@ export function VerifyReportModal() {
     }, [activeTab]);
 
     const handleUpload = () => {
-        setReports(prev => ({
-            ...prev,
-            [activeTab]: {
-                status: 'success',
-                files: [{ type: 'image', url: 'https://placehold.co/800x1200?text=Report+Image' }],
-                currentIndex: 0
-            }
-        }));
+        setImportOpen(true);
+        // We might want to close verify modal temporarily or keep it open in background?
+        // The requirement says "Clicking these shows the import report module".
+        // Usually import modal is on top of verify or verify closes.
+        // "4. When recognition is complete, click import... enter verification module".
+        // This implies verification module might be closed or we are just switching context.
+        // Since ImportModal is global, we can just open it.
+        // But if VerifyModal is open, ImportModal will be on top (z-index).
     };
 
     const handleReUpload = () => handleUpload();

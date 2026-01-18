@@ -97,53 +97,70 @@ export function AuditInfoForm() {
 
   if (!isBasicSubmitted) {
       return (
-          <Card className="w-full opacity-50">
-              <CardHeader><CardTitle className="text-base">审计信息录入 (请先提交基本信息)</CardTitle></CardHeader>
-              <CardContent className="text-sm text-gray-500">
-                  请先完成上方基本信息的填写和提交。
+          <Card className="w-full opacity-60 shadow-sm border-slate-200 border-dashed bg-slate-50/50">
+              <CardHeader className="pb-3 border-b border-slate-100 border-dashed">
+                  <CardTitle className="text-sm font-semibold text-slate-500 flex items-center gap-2">
+                    <span className="w-1 h-4 bg-slate-300 rounded-full"></span>
+                    审计信息录入
+                  </CardTitle>
+              </CardHeader>
+              <CardContent className="text-sm text-slate-400 py-8 text-center">
+                  请先完成上方基本信息的填写和提交
               </CardContent>
           </Card>
       );
   }
 
   return (
-    <Card className="w-full mb-4 shadow-none border-0 sm:border sm:shadow-sm">
-      <CardHeader>
-        <CardTitle className="text-base">审计信息录入</CardTitle>
+    <Card className="w-full mb-4 shadow-sm border-slate-200 bg-white/50 backdrop-blur-sm">
+      <CardHeader className="pb-3 border-b border-slate-100">
+        <CardTitle className="text-sm font-semibold text-slate-800 flex items-center gap-2">
+            <span className="w-1 h-4 bg-blue-600 rounded-full"></span>
+            审计信息录入
+        </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-4">
-         {/* 金额单位 */}
-         <div className="space-y-2">
-            <Label>金额单位</Label>
-            <Select disabled={isAuditSubmitted} value={auditInfo.amountUnit} onValueChange={(val) => setAuditInfo({ amountUnit: val })}>
-                <SelectTrigger><SelectValue placeholder="请选择金额单位" /></SelectTrigger>
-                <SelectContent>
-                    <SelectItem value="yuan">元</SelectItem>
-                    <SelectItem value="thousand">千元</SelectItem>
-                    <SelectItem value="ten_thousand">万元</SelectItem>
-                    <SelectItem value="million">百万</SelectItem>
-                    <SelectItem value="billion">亿</SelectItem>
-                </SelectContent>
-            </Select>
+      <CardContent className="space-y-5 pt-5">
+         <div className="grid grid-cols-2 gap-5">
+            {/* 金额单位 */}
+            <div className="space-y-2">
+                <Label className="text-slate-600 font-medium">金额单位</Label>
+                <Select disabled={isAuditSubmitted} value={auditInfo.amountUnit} onValueChange={(val) => setAuditInfo({ amountUnit: val })}>
+                    <SelectTrigger className="bg-white border-slate-200 focus:ring-blue-500/20">
+                        <SelectValue placeholder="请选择" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value="yuan">元</SelectItem>
+                        <SelectItem value="thousand">千元</SelectItem>
+                        <SelectItem value="ten_thousand">万元</SelectItem>
+                        <SelectItem value="million">百万</SelectItem>
+                        <SelectItem value="billion">亿</SelectItem>
+                    </SelectContent>
+                </Select>
+            </div>
+
+            {/* 小数位数 */}
+            <div className="space-y-2">
+                <Label className="text-slate-600 font-medium">小数位数</Label>
+                <Select disabled={isAuditSubmitted} value={auditInfo.decimalPlaces} onValueChange={(val) => setAuditInfo({ decimalPlaces: val })}>
+                    <SelectTrigger className="bg-white border-slate-200 focus:ring-blue-500/20">
+                        <SelectValue placeholder="请选择" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value="0">0位</SelectItem>
+                        <SelectItem value="2">2位</SelectItem>
+                        <SelectItem value="4">4位</SelectItem>
+                    </SelectContent>
+                </Select>
+            </div>
          </div>
 
-         {/* 小数位数 */}
+         {/* 是否审计 */}
          <div className="space-y-2">
-            <Label>金额保留小数位数</Label>
-            <Select disabled={isAuditSubmitted} value={auditInfo.decimalPlaces} onValueChange={(val) => setAuditInfo({ decimalPlaces: val })}>
-                <SelectTrigger><SelectValue placeholder="请选择小数位数" /></SelectTrigger>
-                <SelectContent>
-                    <SelectItem value="0">0位</SelectItem>
-                    <SelectItem value="2">2位</SelectItem>
-                </SelectContent>
-            </Select>
-         </div>
-
-         {/* 是否已审计 */}
-         <div className="space-y-2">
-            <Label>是否已审计</Label>
+            <Label className="text-slate-600 font-medium">是否审计</Label>
             <Select disabled={isAuditSubmitted} value={auditInfo.isAudited} onValueChange={(val) => setAuditInfo({ isAudited: val })}>
-                <SelectTrigger><SelectValue placeholder="请选择" /></SelectTrigger>
+                <SelectTrigger className="bg-white border-slate-200 focus:ring-blue-500/20">
+                    <SelectValue placeholder="请选择" />
+                </SelectTrigger>
                 <SelectContent>
                     <SelectItem value="yes">是</SelectItem>
                     <SelectItem value="no">否</SelectItem>
@@ -152,17 +169,17 @@ export function AuditInfoForm() {
          </div>
 
          {/* 条件渲染字段 */}
-         <div className={cn("space-y-4 border-l-2 pl-4 ml-1 transition-colors", isAuditedYes ? "border-blue-200" : "border-gray-200")}>
+         <div className={cn("space-y-4 border-l-2 pl-4 ml-1 transition-colors duration-300", isAuditedYes ? "border-blue-400" : "border-slate-200")}>
             {/* 审计日期 */}
             <div className="space-y-2">
-                <Label className={cn(!isAuditedYes && "text-gray-400")}>审计日期</Label>
+                <Label className={cn("text-slate-600 font-medium", !isAuditedYes && "text-slate-400")}>审计日期</Label>
                 <Popover>
                     <PopoverTrigger asChild>
                         <Button
                             variant={"outline"}
                             className={cn(
-                                "w-full justify-start text-left font-normal",
-                                !auditInfo.auditDate && "text-muted-foreground"
+                                "w-full justify-start text-left font-normal bg-white border-slate-200 hover:bg-slate-50",
+                                !auditInfo.auditDate && "text-slate-400"
                             )}
                             disabled={!isAuditedYes || isAuditSubmitted}
                         >
@@ -174,7 +191,6 @@ export function AuditInfoForm() {
                         <Calendar
                             mode="single"
                             locale={zhCN}
-                            captionLayout="dropdown-buttons"
                             fromYear={1990}
                             toYear={new Date().getFullYear() + 5}
                             selected={auditInfo.auditDate ? new Date(auditInfo.auditDate) : undefined}
@@ -187,20 +203,21 @@ export function AuditInfoForm() {
 
             {/* 审计报告编号 */}
             <div className="space-y-2">
-                <Label className={cn(!isAuditedYes && "text-gray-400")}>审计报告编号</Label>
+                <Label className={cn("text-slate-600 font-medium", !isAuditedYes && "text-slate-400")}>审计报告编号</Label>
                 <Input 
                     disabled={!isAuditedYes || isAuditSubmitted} 
                     value={reportNumber} 
                     onChange={(e) => setReportNumber(e.target.value)}
                     onBlur={() => setAuditInfo({ reportNumber })}
+                    className="bg-white border-slate-200 focus:ring-blue-500/20"
                 />
             </div>
 
             {/* 审计事务所 */}
             <div className="space-y-2">
-                <Label className={cn(!isAuditedYes && "text-gray-400")}>审计会计事务所</Label>
+                <Label className={cn("text-slate-600 font-medium", !isAuditedYes && "text-slate-400")}>审计会计事务所</Label>
                 <Select disabled={!isAuditedYes || isAuditSubmitted} value={auditInfo.auditFirm} onValueChange={(val) => setAuditInfo({ auditFirm: val })}>
-                    <SelectTrigger><SelectValue placeholder="请选择事务所" /></SelectTrigger>
+                    <SelectTrigger className="bg-white border-slate-200 focus:ring-blue-500/20"><SelectValue placeholder="请选择事务所" /></SelectTrigger>
                     <SelectContent>
                         <SelectItem value="pwc">普华永道</SelectItem>
                         <SelectItem value="dtt">德勤</SelectItem>
@@ -213,9 +230,9 @@ export function AuditInfoForm() {
 
             {/* 审计意见 */}
             <div className="space-y-2">
-                <Label className={cn(!isAuditedYes && "text-gray-400")}>审计意见</Label>
+                <Label className={cn("text-slate-600 font-medium", !isAuditedYes && "text-slate-400")}>审计意见</Label>
                 <Select disabled={!isAuditedYes || isAuditSubmitted} value={auditInfo.auditOpinion} onValueChange={(val) => setAuditInfo({ auditOpinion: val })}>
-                    <SelectTrigger><SelectValue placeholder="请选择审计意见" /></SelectTrigger>
+                    <SelectTrigger className="bg-white border-slate-200 focus:ring-blue-500/20"><SelectValue placeholder="请选择审计意见" /></SelectTrigger>
                     <SelectContent>
                         <SelectItem value="unqualified">无保留意见</SelectItem>
                         <SelectItem value="unqualified_emphasis">带强调事项段或其他事项段的无保留意见</SelectItem>
@@ -228,21 +245,22 @@ export function AuditInfoForm() {
 
             {/* 查验码 */}
             <div className="space-y-2">
-                <Label className={cn(!isAuditedYes && "text-gray-400")}>查验码</Label>
+                <Label className={cn("text-slate-600 font-medium", !isAuditedYes && "text-slate-400")}>查验码</Label>
                 <Input 
                     disabled={!isAuditedYes || isAuditSubmitted} 
                     value={verificationCode} 
                     onChange={(e) => setVerificationCode(e.target.value)}
                     onBlur={() => setAuditInfo({ verificationCode })}
+                    className="bg-white border-slate-200 focus:ring-blue-500/20"
                 />
             </div>
 
             {/* 无审计报告原因 */}
             {!isAuditedYes && (
                 <div className="space-y-2">
-                    <Label>无审计报告原因</Label>
+                    <Label className="text-slate-600 font-medium">无审计报告原因</Label>
                     <textarea 
-                        className="flex min-h-[80px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                        className="flex min-h-[80px] w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm shadow-sm placeholder:text-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/20 disabled:cursor-not-allowed disabled:opacity-50"
                         maxLength={200}
                         disabled={isAuditSubmitted}
                         value={noAuditReason}
@@ -254,7 +272,16 @@ export function AuditInfoForm() {
             )}
          </div>
 
-         <Button onClick={handleSubmit} disabled={isAuditSubmitted} className="w-full">
+         <Button 
+            onClick={handleSubmit} 
+            disabled={isAuditSubmitted} 
+            className={cn(
+                "w-full transition-all duration-300 shadow-sm",
+                isAuditSubmitted 
+                    ? "bg-slate-100 text-slate-400 hover:bg-slate-200"
+                    : "bg-blue-600 hover:bg-blue-700 hover:shadow-blue-500/20"
+            )}
+         >
             {isAuditSubmitted ? '已提交' : '提交审计信息'}
          </Button>
       </CardContent>

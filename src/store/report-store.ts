@@ -32,7 +32,11 @@ interface ReportStore {
   submittedAuditInfo: AuditInfoData | null;
 
   isVerifyOpen: boolean;
+  isImportOpen: boolean;
+  importData: any | null; // Store imported files data
   setVerifyOpen: (val: boolean) => void;
+  setImportOpen: (val: boolean) => void;
+  setImportData: (data: any) => void;
 
   setBasicInfo: (data: Partial<BasicInfoData>) => void;
   setAuditInfo: (data: Partial<AuditInfoData>) => void;
@@ -72,6 +76,8 @@ export const useReportStore = create<ReportStore>()(
       isBasicSubmitted: false,
       isAuditSubmitted: false,
       isVerifyOpen: false,
+      isImportOpen: false,
+      importData: null,
       submittedBasicInfo: null,
       submittedAuditInfo: null,
 
@@ -81,12 +87,17 @@ export const useReportStore = create<ReportStore>()(
       setBasicSubmitted: (val) => set({ isBasicSubmitted: val }),
       setAuditSubmitted: (val) => set({ isAuditSubmitted: val }),
       setVerifyOpen: (val) => set({ isVerifyOpen: val }),
+      setImportOpen: (val) => set({ isImportOpen: val }),
+      setImportData: (data) => set({ importData: data }),
       reset: () => set({
         basicInfo: initialBasicInfo,
         auditInfo: initialAuditInfo,
         reportId: null,
         isBasicSubmitted: false,
         isAuditSubmitted: false,
+        isVerifyOpen: false,
+        isImportOpen: false,
+        importData: null,
       }),
       commitToSubmitted: () => set((state) => ({
         submittedBasicInfo: state.basicInfo,
@@ -98,7 +109,10 @@ export const useReportStore = create<ReportStore>()(
             basicInfo: state.submittedBasicInfo,
             auditInfo: state.submittedAuditInfo || initialAuditInfo,
             isBasicSubmitted: true,
-            isAuditSubmitted: !!state.submittedAuditInfo
+            isAuditSubmitted: !!state.submittedAuditInfo,
+            isVerifyOpen: false,
+            isImportOpen: false,
+            importData: null,
           };
         }
         // If no submitted info, reset to initial to clear any draft
@@ -109,6 +123,8 @@ export const useReportStore = create<ReportStore>()(
           isBasicSubmitted: false,
           isAuditSubmitted: false,
           isVerifyOpen: false,
+          isImportOpen: false,
+          importData: null,
         };
       }),
     }),

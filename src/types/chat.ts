@@ -30,7 +30,7 @@ export interface Message {
   content: string; // 消息内容
   timestamp: number; // 发送时间戳
   stepId?: StepId; // 消息所属步骤 ID
-  widget?: 'customer-list' | 'financial-report-list'; // Widget type to render
+  widget?: 'customer-list' | 'financial-report-list' | 'new-report' | 'placeholder'; // Widget type to render
   widgetData?: any; // Data for the widget
 }
 

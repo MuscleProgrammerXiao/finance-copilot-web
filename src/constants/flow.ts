@@ -19,13 +19,11 @@ export const CARD_COMPONENT = {
   CustomerList: "客户列表",
   CustomerLock: "客户锁定",
   NewFinancialReport: "新增财务报表",
-  CreditReportInput: "授信报告录入",
   AIGenerateReport: "AI生成报告",
   PublicCompanyReportInput: "上市公司财报录入",
-  BasicInfoInput: "基本信息录入",
+  BasicInfoInput: "已录入基本信息",
   ImportReport: "导入报表",
   VerifyReport: "校验财报",
-  Feedback: "吐槽反馈",
 } as const;
 
 export type CardComponentType = typeof CARD_COMPONENT;

@@ -2,6 +2,7 @@
 
 import { ChatContainer } from "@/src/components/chat/chat-container";
 import { VerifyReportModal } from "@/src/components/report/verify-report-modal";
+import { ImportReportModal } from "@/src/components/report/import-report-modal";
 
 export default function Page() {
   return (
@@ -10,6 +11,7 @@ export default function Page() {
         <ChatContainer />
       </div>
       <VerifyReportModal />
+      <ImportReportModal />
     </main>
   );
 }

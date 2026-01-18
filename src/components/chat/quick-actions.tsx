@@ -4,6 +4,7 @@ import { Button } from "@/src/components/ui/button";
 import { motion } from "framer-motion";
 import { cn } from "@/src/lib/utils";
 import { useChatStore } from "@/src/store/chat-store";
+import { useReportStore } from "@/src/store/report-store";
 
 interface QuickActionsProps {
   onAction: (key: string, label: string) => void;
@@ -11,11 +12,20 @@ interface QuickActionsProps {
 
 export function QuickActions({ onAction }: QuickActionsProps) {
   const selectedCustomer = useChatStore((state) => state.selectedCustomer);
+  const { submittedBasicInfo, reportId } = useReportStore();
 
   // Generate actions list from CARD_COMPONENT
-  const actionsList = Object.entries(CARD_COMPONENT).map(([key, label]) => {
-     let displayLabel = label;
-     let value = label;
+  const actionsList = Object.entries(CARD_COMPONENT)
+    .filter(([key]) => {
+      // 4. Hide BasicInfoInput if no info exists
+      if (key === 'BasicInfoInput') {
+         return !!(selectedCustomer && submittedBasicInfo && reportId);
+      }
+      return true;
+    })
+    .map(([key, label]) => {
+     let displayLabel = label as string;
+     let value = label as string;
      // Default variant for all buttons
      let variant: "outline" | "default" | "secondary" | "ghost" | "link" | "destructive" = "outline";
      

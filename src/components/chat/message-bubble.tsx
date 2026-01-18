@@ -86,14 +86,14 @@ export function MessageBubble({ message, onWidgetAction }: MessageBubbleProps) {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
           >
-             <NewReportForm />
+             <NewReportForm isOverwritePrompt={message.widgetData?.isOverwritePrompt} />
           </motion.div>
         )}
       </div>
 
       {isUser && (
-        <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center shrink-0">
-          <User className="w-5 h-5 text-gray-600" />
+        <div className="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center shrink-0 border-2 border-white shadow-sm">
+          <User className="w-5 h-5 text-slate-500" />
         </div>
       )}
     </motion.div>
