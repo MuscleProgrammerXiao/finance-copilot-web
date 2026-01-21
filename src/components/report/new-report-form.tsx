@@ -59,6 +59,23 @@ export function NewReportForm({ isOverwritePrompt }: { isOverwritePrompt?: boole
                  <div className="w-full border-t border-gray-200 pt-4 mt-2">
                     <BasicInfoForm />
                     <AuditInfoForm />
+                    <div className="flex gap-4 pt-4 px-1">
+                        <Button 
+                            className="flex-1" 
+                            variant="outline" 
+                            disabled={!isAllSubmitted}
+                            onClick={handleVerify}
+                        >
+                            校验财报
+                        </Button>
+                        <Button 
+                            className="flex-1" 
+                            disabled={!isAllSubmitted}
+                            onClick={handleImport}
+                        >
+                            导入报表
+                        </Button>
+                    </div>
                  </div>
             </div>
         )
