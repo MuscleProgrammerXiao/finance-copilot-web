@@ -6,6 +6,7 @@
     "dev": "next dev",
     "dev:mock": "NEXT_PUBLIC_API_MOCK=true next dev",
     "build": "next build",
+    "build:mock": "NEXT_PUBLIC_API_MOCK=true next build",
     "start": "next start",
     "lint": "eslint",
     "gen:api": "openapi-typescript src/api/schema.json -o src/gen/api-types.ts"
