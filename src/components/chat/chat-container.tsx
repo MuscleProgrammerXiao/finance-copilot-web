@@ -55,7 +55,6 @@ export function ChatContainer() {
           <div className="flex flex-col gap-1">
             <h2 className="text-base font-bold text-slate-800 tracking-tight flex items-center gap-2">
               财报智能录入机器人
-              <span className="px-2 py-0.5 rounded-full bg-cyan-50 text-cyan-700 text-[10px] font-extrabold uppercase tracking-wider border border-cyan-100/50">Beta</span>
             </h2>
             
             {/* 进度条组件 */}
